@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default function SupplierRecommendation() {
   const [suppliers, setSuppliers] = useState([]);
@@ -21,37 +18,32 @@ export default function SupplierRecommendation() {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">AI Supplier Recommendation</h1>
+    <div style={{ padding: 20 }}>
+      <h1>AI Supplier Recommendation</h1>
+      <div style={{ background: '#ffe5e5', padding: 15, marginBottom: 20 }}>
+        <h2>Flagged Supplier: {flaggedSupplier.name}</h2>
+        <p>Risk Score: {flaggedSupplier.riskScore}</p>
+        <p>Tier-N Risk Exposure: {flaggedSupplier.tierNRisk}</p>
+        <p>Self-Assessment Score: {flaggedSupplier.selfAssessment}</p>
+        <p>Geopolitical Stability: {flaggedSupplier.geopoliticalStability}</p>
+      </div>
 
-      <Card className="mb-6 p-4 bg-red-100">
-        <CardContent>
-          <h2 className="text-xl font-semibold">Flagged Supplier: {flaggedSupplier.name}</h2>
-          <p>Risk Score: {flaggedSupplier.riskScore}</p>
-          <p>Tier-N Risk Exposure: {flaggedSupplier.tierNRisk}</p>
-          <p>Self-Assessment Score: {flaggedSupplier.selfAssessment}</p>
-          <p>Geopolitical Stability: {flaggedSupplier.geopoliticalStability}</p>
-        </CardContent>
-      </Card>
-
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Supplier</TableHead>
-            <TableHead>Recommendation Score</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+      <table border="1" cellPadding="10">
+        <thead>
+          <tr>
+            <th>Supplier</th>
+            <th>Recommendation Score</th>
+          </tr>
+        </thead>
+        <tbody>
           {suppliers.map((supplier, index) => (
-            <TableRow key={index}>
-              <TableCell>{supplier.Supplier}</TableCell>
-              <TableCell>{supplier["Recommendation Score"].toFixed(2)}</TableCell>
-              <TableCell><Button variant="outline">Compare</Button></TableCell>
-            </TableRow>
+            <tr key={index}>
+              <td>{supplier.Supplier}</td>
+              <td>{supplier["Recommendation Score"].toFixed(2)}</td>
+            </tr>
           ))}
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
     </div>
   );
 }
